@@ -18,6 +18,9 @@ input {
   margin-left: 8em;
 }
 
+i {
+}
+
 .titleContainer {
   display: flex;
   flex-direction: row;
@@ -44,6 +47,7 @@ input {
   border-radius: 5px;
   padding: 15px;
   margin-left: 100px;
+  margin-top: 2em;
 }
 
 .forecastContainer {
@@ -60,4 +64,6 @@ input {
   margin: 0px;
   flex-direction: row;
   align-items: center;
+  font-size: xx-large;
+  padding: 0px;
 }

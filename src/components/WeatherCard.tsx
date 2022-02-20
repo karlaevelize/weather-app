@@ -12,13 +12,13 @@ export const WeatherCard = ({ name, conditions, temp, minTemp, maxTemp, weatherI
 
   return (
     <div className="mainForecast">
-      <h3>{name}</h3>
-      <p>{date}</p>
+      <h3 style={{margin: 0, padding: 0}}>{name}</h3>
+      {/* <p>{date}</p> */}
       <div className="iconContainer">
-        <i className={`wi ${weatherIcon} display-0`} />
+        <i className={`wi ${weatherIcon} display-1`} />
         <p>{temp}</p>
       </div>
-      <p>{conditions}</p>
+      <p style={{margin: 0, padding: 0}}>{conditions}</p>
       <p>L <b>{minTemp}</b> H <b>{maxTemp}</b></p>
     </div>
   )
