@@ -1,3 +1,21 @@
-.App {
-  text-align: center;
+body {
+  background-color: whitesmoke;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainForecast {
+  display: flex;
+  flex-direction: column;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

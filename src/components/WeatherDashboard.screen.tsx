@@ -1,13 +1,15 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-// import { fetchWeather } from "../functions"
+import { fetchWeather, getWeatherIcon } from "../functions"
 import { WeatherCard } from "./WeatherCard"
+import { ForecastCard } from "./ForecastCard"
 
-type city = {
+type typeCity = {
   name: string
   conditions: string
   weather: {
     main: string;
+    id: number;
   }[]
   main: {
     temp: number;
@@ -17,39 +19,64 @@ type city = {
   }
 }
 
+type typeForecast = {
+
+}[]
+
 export const WeatherDashboard = () => {
 
   const [ search, setSearch ] = useState<string>("")
-  const [ cityWeather, setCityWeather ] = useState<city | undefined>()
-
-  const fetchWeather = async (cityName: string) => {
-    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=8c9994a494a67a07a74db2d8d543a27b`)
-    setCityWeather(response.data)
-  }
-
-  console.log("city weather", cityWeather)
+  const [ cityWeather, setCityWeather ] = useState<typeCity | undefined>()
+  const [ forecast, setForecast] = useState<typeForecast | undefined>()
 
   const submit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    fetchWeather(search)
+    fetchWeather(search, setCityWeather, setForecast)
     setSearch("")
+  }
+
+  console.log("city", cityWeather)
+  console.log("forecast", forecast)
+
+  const icons = {
+    Thunderstorm: "wi-thunderstorm",
+    Drizzle: "wi-sleet",
+    Rain: "wi-storm-showers",
+    Snow: "wi-snow",
+    Atmosphere: "wi-fog",
+    Clear: "wi-day-sunny",
+    Clouds: "wi-day-fog"
   }
 
   return (
     <div>
-      <h1>Weather App</h1>
-      <form onSubmit={submit}>
-        <input type="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
-      </form>
+      <div className="titleContainer">
+        <h1>Weather </h1>
+        <form onSubmit={submit}>
+          <input type="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
+        </form>
+      </div>
       {cityWeather && 
         <WeatherCard 
           name={cityWeather.name}
           conditions={cityWeather.weather[0].main}
-          temp={cityWeather.main.temp}
-          minTemp={cityWeather.main.temp_min}
-          maxTemp={cityWeather.main.temp_max}
-          feelsLike={cityWeather.main.feels_like}
+          temp={Math.round(cityWeather.main.temp - 273.15)}
+          minTemp={Math.round(cityWeather.main.temp_min - 273.15)}
+          maxTemp={Math.round(cityWeather.main.temp_max - 273.15)}
+          feelsLike={Math.round(cityWeather.main.feels_like - 273.15)}
+          weatherIcon={getWeatherIcon(icons, cityWeather.weather[0].id)}
         />
+      }
+      {forecast && forecast.slice(1).map(day => (
+          <ForecastCard
+            date={new Date(day.dt * 1000).toLocaleDateString('en-GB', { weekday: 'long', month: 'long', day: 'numeric' })}
+            conditions={day.weather[0].main}
+            temp={Math.round(day.dew_point - 273.15)}
+            minTemp={Math.round(day.temp.min - 273.15)}
+            maxTemp={Math.round(day.temp.max - 273.15)}
+            weatherIcon={getWeatherIcon(icons, day.weather[0].id)}
+          />)
+        )
       }
     </div>
   )
