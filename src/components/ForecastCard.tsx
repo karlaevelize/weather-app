@@ -12,13 +12,15 @@ type WeatherCardProps = {
 export const ForecastCard = ({ name, conditions, temp, minTemp, maxTemp, feelsLike, weatherIcon, date }: WeatherCardProps) => {
 
   return (
-    <div>
+    <div className="forecastContainer">
       <h3>{name}</h3>
       <p>{date}</p>
+      <div style={{width: 50, height: 30, textAlign: "center"}}>
       <i className={`wi ${weatherIcon} display-0`} />
+      </div>
       <p>{temp}</p>
       <p>{conditions}</p>
-      <p>L <b>{minTemp}</b> H <b>{maxTemp}</b>, feels like: <b>{feelsLike}</b></p>
+      {/* <p>L <b>{minTemp}</b> H <b>{maxTemp}</b></p> */}
     </div>
   )
 }

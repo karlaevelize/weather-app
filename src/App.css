@@ -2,6 +2,22 @@ body {
   background-color: whitesmoke;
 }
 
+h1 {
+  color: #488faf;
+  font-weight: 500;
+}
+
+input {
+  border: none;
+  outline: none;
+  padding: 0.8em;
+  border-radius: 18px;
+  background-color: #488faf;
+  color: whitesmoke;
+  font-weight: 600;
+  margin-left: 8em;
+}
+
 .titleContainer {
   display: flex;
   flex-direction: row;
@@ -9,13 +25,39 @@ body {
   justify-content: center;
 }
 
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.mapContainer {
+  display: flex;
+  flex-direction: row;
+  margin-left: 3em;
+}
+
 .mainForecast {
+  /* display: flex; */
+  /* flex-direction: column; */
+  width: 150px;
+  box-shadow: 5px 5px 5px 5px #888888;
+  border-radius: 5px;
+  padding: 15px;
+  margin-left: 100px;
+}
+
+.forecastContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  width: 80px;
 }
 
 .iconContainer {
   display: flex;
+  margin: 0px;
   flex-direction: row;
   align-items: center;
 }
